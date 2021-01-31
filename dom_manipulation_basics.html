@@ -16,13 +16,13 @@
 
     <div id="div1" class="bigBorder" ></div>
     <div id="div2">
-      <img id= "img1" src="">
+      <img id = "img1" src="">
     </div>
     <div id="div3">
       This div should be programmatically removed.
     </div>
 
-    <ul>
+    <ul id="ul1">
       <li class="big blue">IT202</li>
     </ul>
 
@@ -50,6 +50,8 @@
       //University_of_Illinois_at_Chicago_circle_logo.svg
       //1200px-University_of_Illinois_at_Chicago_circle_logo.svg.png
 
+      // let img1 = document.querySelector("#img")
+      // img1.setAttribute("id ","img1")
       document.querySelector("#img1").setAttribute("src","https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/University_of_Illinois_at_Chicago_circle_logo.svg/1200px-University_of_Illinois_at_Chicago_circle_logo.svg.png")
 
       //5
@@ -71,37 +73,40 @@
       //8 
       //Create a list item element
 
-      let li = document.createElement("LI")
+      var li = document.createElement("LI")
 
       //9
       //Set the content to Computer Science
 
     //   let p = document.createElement("p")
     //   p.innerText = "Computer Science"
-       li.appendChild("Computer Science")
+       var cs =  document.createTextNode("Computer Science")
+       li.appendChild(cs)
 
 
       //10
       //Add that list item element to the unordered list
 
-      document.querySelector("#ul").appendChild(li);
+      let ul1 = document.querySelector("#ul1")
+      ul1.appendChild(li);
 
       //11
       //Remove the class big from the first list item element
-
-      var first = document.querySelector("#ul")
-      first.list.childNodes[0].classList.remove(big)
+      let ulLi = ul1.getElementsByTagName("li")
+      var first = ulLi[0]
+      //let ulLi = ul1.getElementsByTagName(li)
+      first.classList.remove("big")
 
       //12
       //Add the class blue to the second list item element
 
-      var second = document.querySelector("#ul")
-      second.list.childNodes[1].className += blue
+      var second = ulLi[1]
+      second.classList.add("blue")
 
       //13
       //Create a clone of the image element
-
-      let img2 = img.cloneNode(true);
+      let imga = document.getElementsByTagName("img")
+      let img2 = imga.cloneNode(true);
 
       //div.after(div2);
 
