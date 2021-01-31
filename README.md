@@ -1,2 +1,1 @@
-# CSS-Basics
-Week 2 Activity Project IT 202
+# Spring 21 Activities folder
