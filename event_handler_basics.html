@@ -31,17 +31,20 @@
     <script>
 
     //when the user mouses over an image, add the bigger class;
-    let img1 = document.getElementsByTagName("img")
-    img1.addEventListener("onmouseover", function() {
-    //let addclass = document.getElementById("img")
-    img1.classList.add("bigger")
+    let img1 = document.querySelector("#images")
+    img1.addEventListener("mouseover", function() {
+    // let addclass = onmouseover.currentTarget
+    // addclass.classList.add("bigger")
+    event.currentTarget.classList.add("bigger")
+    //img1.classList.add("bigger")
 })
 
    //when the user mouses out of an image, remove the bigger class
 
-   img1.addEventListener("onmouseout", function() {
-    //let addclass2 = document.getElementById("img")
-    img1.classList.remove("bigger")
+   img1.addEventListener("mouseout", function() {
+    //let addclass2 = document.querySelector("#img")    //img1.classList.remove("bigger")
+    //img1.classList.remove("bigger")
+    event.currentTarget.classList.remove("bigger")
 })
 
     //when the user clicks the quote, open the cite value in a new tab
