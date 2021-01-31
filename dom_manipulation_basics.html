@@ -16,7 +16,7 @@
 
     <div id="div1" class="bigBorder" ></div>
     <div id="div2">
-      <img src="">
+      <img id= "img1" src="">
     </div>
     <div id="div3">
       This div should be programmatically removed.
@@ -41,8 +41,8 @@
 
       //3
       //Add the class big to div1
-
-      document.getElementById("div1").className += "big"
+      let div11 = document.querySelector("#div1")
+      div11.classList.add("big")
 
       //4
       //Set the src value of the image element to be 
@@ -50,13 +50,13 @@
       //University_of_Illinois_at_Chicago_circle_logo.svg
       //1200px-University_of_Illinois_at_Chicago_circle_logo.svg.png
 
-      document.querySelector("#img").setAttribute("src","https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/University_of_Illinois_at_Chicago_circle_logo.svg/1200px-University_of_Illinois_at_Chicago_circle_logo.svg.png")
+      document.querySelector("#img1").setAttribute("src","https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/University_of_Illinois_at_Chicago_circle_logo.svg/1200px-University_of_Illinois_at_Chicago_circle_logo.svg.png")
 
       //5
       //Set the width and height properties of the image element to 25%
 
-      document.getElementById("img").width = "25%"
-      document.getElementById("img").height = "25%"
+      // document.getElementById("img").width = "25%"
+      // document.getElementById("img").height = "25%"
 
       //6
       //Remove div3
