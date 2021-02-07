@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>repl.it</title>
+  </head>
+  <body>
+    <h1>Form Basics</h1>
+
+    <p id="uptonSinclairQuote">
+It is difficult to get a man to understand something, when his salary depends upon his not understanding it! -- Upton Sinclair
+    </p>
+    
+    <form action="/action_page.php" id="form1" name="form1">
+        <label for="text1">text1</label><br>
+        <input type="text" id="text1" name="text1"/><br>
+        <label for="red">red</label><br>
+        <input type="radio" id="red" name="radio1" value="red"><br>
+        <label for="green">green</label><br>
+        <input type="radio" id="green" name="radio1" value="green"><br>
+        <label for="blue">blue</label><br>
+        <input type="radio" id="blue" name="radio1" value="blue"><br>
+        <label for="select1">Select Day</label><br>
+        <select id="select1" name="select1">
+          <option value=""></option>
+          <option value="Mon">Mon</option>
+          <option value="Wed">Wed</option>
+          <option value="Fri">Fri</option>
+        </select><br>
+        <label for="textarea1">Feedback:</label><br>
+        <textarea id="textarea1" name="textarea1" placeholder="Please provide any additional feedback"></textarea>
+    </form>
+
+    <script>
+
+      //1. Set the value of the text input to your name
+      let setMyName = document.querySelector("#text1")
+      setMyName.value = "Saummay Singhal"
+
+      //2. Select the radio button with the value green
+
+           //a. Get the right one with a attribute selector
+           let selectGreen = document.querySelector("#form1 > input[value=green]")
+
+           //b. Set the checked property
+           selectGreen.checked = true
+
+      //3. Set the value of the textarea element to be the quotation (by reading the value of the paragraph element.)
+
+        let area = document.querySelector("#textarea1")
+        area.value = document.querySelector("#uptonSinclairQuote").innerText
+
+     //4. Add a change event handler on the select control;  the function should log the selected value to the console.
+
+       document.querySelector("#select1").addEventListener("change",(e)=>{ console.log(e.target.value)})
+
+
+
+
+
+
+    </script>
+  </body>
+</html>
