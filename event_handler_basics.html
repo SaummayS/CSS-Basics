@@ -31,7 +31,8 @@
     <script>
 
     //when the user mouses over an image, add the bigger class;
-    let img1 = document.querySelector("#images")
+    //let img1 = document.querySelector("#images")
+[...document.querySelectorAll("img")].map((img1) => {
     img1.addEventListener("mouseover", function() {
     // let addclass = onmouseover.currentTarget
     // addclass.classList.add("bigger")
@@ -46,6 +47,7 @@
     //img1.classList.remove("bigger")
     event.currentTarget.classList.remove("bigger")
 })
+    })
 
     //when the user clicks the quote, open the cite value in a new tab
     let quote = document.querySelector("blockquote")
