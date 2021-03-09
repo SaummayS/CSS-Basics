@@ -1,0 +1,93 @@
+<html>
+  <head>
+
+    <title>Chart Basics</title>
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart1);
+      google.charts.setOnLoadCallback(drawChart2);
+
+      let url1 = "https://data.cityofchicago.org/resource/dw27-rash.json?$SELECT=school_type,count(school_type)&$GROUP=school_type"
+
+      //Pie Chart
+      //retrieve count by school type data from the City of Chicago data portal using the URL
+
+      function drawChart1() 
+      {
+
+         // Create the data table.
+         let  data = new google.visualization.DataTable();
+         data.addColumn('string','School Type');
+         data.addColumn('number','Count');
+
+        fetch
+        (url1).then((response)=>{return response.json() })
+        .then((data2)=>{
+                      data2.forEach((record)=>{
+                      data.addRow( [record.school_type,
+                      parseInt(record.count_school_type)] )
+                      });
+
+                      // create a Google Charts pie chart using the returned data.  Give it an appropriate title.
+                      let options = {'title':'Chicago Public Schools Pie Chart',
+                                     'width':500,
+                                     'height':250};
+
+                      // Instantiate and draw our chart, passing in some options.
+                      let chart = new google.visualization.PieChart(document.querySelector('#chart_div1'));
+                      chart.draw(data, options);
+
+                    }) 
+      }
+
+      let url2 = "https://data.cityofchicago.org/resource/553k-3xzc.json?$SELECT=date,sum(total_doses_cumulative)&$GROUP=date&$ORDER=date"
+      //Line Chart
+      //retrieve cumulative doses by date data from the CIty of Chicago data portal;
+
+      function drawChart2()
+      {
+         // Create the data table.
+         let data = new google.visualization.DataTable();
+         data.addColumn('string','Date');
+         data.addColumn('number','Total');
+
+        fetch
+        (url2).then((response)=>{return response.json() })
+        .then((data2)=>{
+                    data2.forEach((record)=>{
+                    data.addRow( [(record.date).substring(0,10),
+                    parseInt(record.sum_total_doses_cumulative)] )
+                    });
+
+                  // create a line chart for this data series.   Give it a meaningful title and axis labels.
+                  let options = {
+                    'title': 'COVID-19 Vaccinations Line Chart',
+                    'width':600,
+                    'height':550,
+                    curveType: 'function',
+                    legend: { position: 'bottom' }
+                  };
+
+                  // Instantiate and draw our chart, passing in some options.
+                  let chart = new google.visualization.LineChart(document.querySelector('#chart_div2'));
+                  chart.draw(data, options);
+
+                 })
+
+      }
+    </script>
+  </head>
+
+  <body>
+    <!--Div that will hold the pie chart-->
+    <div id="chart_div1"></div>
+    <!--Div that will hold the line chart-->
+    <div id="chart_div2"></div>
+  </body>
+</html>
