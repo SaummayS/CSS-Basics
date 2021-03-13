@@ -19,7 +19,7 @@
 			padding: 0;
 		}
 	</style>
-	<img src="images/smiley.jfif" id="html-img" style="display:none">
+	<img src="images/smiley.jpg" id="html-img" style="display:none">
 	<script>
 		document.addEventListener("DOMContentLoaded", () => {
 			  let canvas = document.querySelector("#html-canvas");
@@ -51,8 +51,8 @@
 			  context.closePath();
 
 			  //a small image drawn multiple times on the canvas;
-			  let xt = 15;
-			  let y = 5;
+			 let xt = 15;
+			  //let y = 5;
 			  let img = document.querySelector("#html-img");
 			  draw(); 
 
@@ -60,27 +60,28 @@
 			  context.strokeStyle = "black"
 			  context.lineWidth = 3;
 			  context.font = "35px Amaranth";
-			  context.strokeText("Saummay Singhal",220, 90);
+			  context.strokeText("Saummay Singhal",90, 250);
 
 			  function draw() {
-			  context.drawImage(img,20,xt)
+			  
 			  //img = new Image();
 			  //img.onload = function() {
-    			//for (let i = 0; i < 40; i++) {
+    			for (let i = 10; i < 150; i*=8) {
+    				context.drawImage(img,i,xt)
+    				xt += 110;
+    				//context.drawImage(img,xt,110)
+    				context.drawImage(img,xt,i)
+
+    				context.drawImage(img,xt+100,i*1.9)
       				//for (let j = 30; j < 90; j++) {
-        			//context.drawImage(img, xt, y);
-        			//y += 3;
-        			if(y>canvas.height || xt<0 || xt>canvas.width){
-        				y += -13;
         			}
-        			xt += y;
-        	    context.drawImage(img,xt,110)
+        			//xt += y;
      			   //}
    				 //}
  			 //};
 
  			//img.src = "images/smiley.jfif"
-			  requestAnimationFrame(draw);
+			  //requestAnimationFrame(draw);
 			}
 
 
