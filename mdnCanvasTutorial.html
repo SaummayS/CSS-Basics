@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+	<meta charset='utf-8'/>
+    <title>MDN Canvas Tutorial</title>
+	<link href='https://fonts.googleapis.com/css?family=Amaranth' rel='stylesheet'>
+	<!-- Use a font from Google Fonts, and give it a size and contrasting color so that it's easily visible. -->
+	<style>
+		/*a 500x500 canvas with some background color.*/
+		canvas{
+			height: 500px; 
+			width: 500px; 
+			position: absolute; 
+			background-color: #ff7d7d;
+			}
+		body {
+			margin: 0;
+			padding: 0;
+		}
+	</style>
+	<img src="images/smiley.jfif" id="html-img" style="display:none">
+	<script>
+		document.addEventListener("DOMContentLoaded", () => {
+			  let canvas = document.querySelector("#html-canvas");
+			  let circles = [];
+			  //let radius = 5;
+			  canvas.width = canvas.clientWidth;
+			  canvas.height = canvas.clientHeight;
+			  let context = canvas.getContext("2d");
+
+			  context.beginPath();
+
+			  //a blue filled rectangle with some clearly visible shadow;
+			  context.clearRect(0, 0, canvas.width, canvas.height);
+			  context.shadowBlur = 105;
+			  context.shadowColor = "black";
+			  context.fillStyle = "blue";
+			  context.fillRect(305, 305, 100, 100);
+
+              context.closePath();
+              context.shadowBlur = 0;
+
+
+              context.beginPath();
+			  //a red filled circle;
+			  context.arc(350,447,40,0,2*Math.PI);
+			  context.fillStyle = "red";
+			  context.fill();
+
+			  context.closePath();
+
+			  //a small image drawn multiple times on the canvas;
+			  let xt = 15;
+			  let y = 5;
+			  let img = document.querySelector("#html-img");
+			  draw(); 
+
+			  //stroke text with your name.
+			  context.strokeStyle = "black"
+			  context.lineWidth = 3;
+			  context.font = "35px Amaranth";
+			  context.strokeText("Saummay Singhal",220, 90);
+
+			  function draw() {
+			  context.drawImage(img,20,xt)
+			  //img = new Image();
+			  //img.onload = function() {
+    			//for (let i = 0; i < 40; i++) {
+      				//for (let j = 30; j < 90; j++) {
+        			//context.drawImage(img, xt, y);
+        			//y += 3;
+        			if(y>canvas.height || xt<0 || xt>canvas.width){
+        				y += -13;
+        			}
+        			xt += y;
+        	    context.drawImage(img,xt,110)
+     			   //}
+   				 //}
+ 			 //};
+
+ 			//img.src = "images/smiley.jfif"
+			  requestAnimationFrame(draw);
+			}
+
+
+			}, false);
+
+	</script>
+	</head>
+	<body>
+    <canvas id="html-canvas">
+  </body>
+
+</html>>
