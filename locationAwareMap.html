@@ -27,28 +27,25 @@
 
       function watchPos(){
       
-      if('geolocation' in navigator){
-        /* geolocation is available */
-        navigator.geolocation.watchPosition((p)=>{
-          const loc = {lat: p.coords.latitude, lng: p.coords.longitude  }
+      navigator.geolocation.watchPosition((p)=>{
+
+          const drawCirc = new google.maps.Circle({
+            fillColor: "#ff7d7d",
+            map,
+            center: {lat: p.coords.latitude , lng: p.coords.longitude},
+            radius: 3.5,
+          })
+
           let date = Date();
           const locOutput = "{lat:" + p.coords.latitude + ",Lng: " + p.coords.longitude + "}" + date ;
-
+          
           let ul = document.querySelector('#loc');
           let li = document.createElement('li');
           let textNode = document.createTextNode(locOutput);
           li.appendChild(textNode);
           ul.prepend(li);
 
-          const drawCirc = new google.maps.Circle({
-            fillColor: "#ff7d7d",
-            map,
-            center: loc,
-            radius: 3.5,
-          })
-
         })
-      }
 
       }  
 
