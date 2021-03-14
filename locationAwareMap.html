@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>locationAwareMap</title>
+
+    <style>
+        .screen{display: none;}
+        #id1 {width:50%;
+            display:block;
+            margin:auto;}
+        #map{height: 100%;}
+        html,
+        body{
+          height: 100%;
+          margin: 0;
+          padding: 0;
+        }
+      </style>
+      <script>
+
+      function watchPosition(){
+      
+      if('geolocation' in navigator){
+        /* geolocation is available */
+        navigator.geolocation.watchPosition((p)=>{
+          const loc = {lat: p.coords.latitude, lng: p.coords.longitude  }
+          let date = Date();
+          const locOutput = "{lat:" + p.coords.latitude + ",Lng: " + p.coords.longitude + "}" + date ;
+
+          let ul = document.querySelector('#loc');
+          let li = document.createElement('li');
+          let textNode = document.createTextNode(locOutput);
+          li.appendChild(textNode);
+          ul.prepend(li);
+
+          const drawCirc = new google.maps.Circle({
+            fillColor: "#ff7d7d",
+            map,
+            center: loc,
+            radius: 9,
+          })
+
+        })
+      }
+
+      }  
+
+
+
+      let map;
+  
+      function initMap(){
+        navigator.geolocation.getCurrentPosition((p)=>{
+          map = new google.maps.Map(document.querySelector("#map"),{
+          //center: {lat:41.87156228337112 , lng: -87.64935330783663},
+          center: {lat: p.coords.latitude , lng: p.coords.longitude},
+          zoom: 17.3,
+          styles: [
+      { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
+      { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
+      { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
+      {
+        featureType: "administrative.locality",
+        elementType: "labels.text.fill",
+        stylers: [{ color: "#d59563" }],
+      },
+      {
+        featureType: "poi",
+        elementType: "labels.text.fill",
+        stylers: [{ color: "#d59563" }],
+      },
+      {
+        featureType: "poi.park",
+        elementType: "geometry",
+        stylers: [{ color: "#263c3f" }],
+      },
+      {
+        featureType: "poi.park",
+        elementType: "labels.text.fill",
+        stylers: [{ color: "#6b9a76" }],
+      },
+      {
+        featureType: "road",
+        elementType: "geometry",
+        stylers: [{ color: "#38414e" }],
+      },
+      {
+        featureType: "road",
+        elementType: "geometry.stroke",
+        stylers: [{ color: "#212a37" }],
+      },
+      {
+        featureType: "road",
+        elementType: "labels.text.fill",
+        stylers: [{ color: "#9ca5b3" }],
+      },
+      {
+        featureType: "road.highway",
+        elementType: "geometry",
+        stylers: [{ color: "#746855" }],
+      },
+      {
+        featureType: "road.highway",
+        elementType: "geometry.stroke",
+        stylers: [{ color: "#1f2835" }],
+      },
+      {
+        featureType: "road.highway",
+        elementType: "labels.text.fill",
+        stylers: [{ color: "#f3d19c" }],
+      },
+      {
+        featureType: "transit",
+        elementType: "geometry",
+        stylers: [{ color: "#2f3948" }],
+      },
+      {
+        featureType: "transit.station",
+        elementType: "labels.text.fill",
+        stylers: [{ color: "#d59563" }],
+      },
+      {
+        featureType: "water",
+        elementType: "geometry",
+        stylers: [{ color: "#17263c" }],
+      },
+      {
+        featureType: "water",
+        elementType: "labels.text.fill",
+        stylers: [{ color: "#515c6d" }],
+      },
+      {
+        featureType: "water",
+        elementType: "labels.text.stroke",
+        stylers: [{ color: "#17263c" }],
+      },
+    ],
+        })
+
+        })
+        watchPosition(map);
+      }
+      </script>
+    
+  </head>
+  <body>
+    <!-- <h1>Hello, world!</h1> -->
+ 
+   <div id="map"><h1>Hello, world!</h1>
+   </div>
+
+   <ul id="loc"></ul>
+
+       <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZ3JlKCAfq3IFs7n4W6jYupLPnQFneyho&callback=initMap&libraries=&v=weekly"
+        async>
+       </script>
+  
+
+
+  </body>
+</html>
