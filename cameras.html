@@ -68,11 +68,11 @@
 	</header>
 
 	<main>
-		<div class="controls">
+		<div id="controls" class="controls">
 			<button id="button">Get camera</button>
-      <select id="select">
+      <!-- <select id="select">
         <option></option>
-      </select>
+      </select> -->
     </div>
 
     <video id="video" autoplay playsinline></video>
@@ -88,7 +88,8 @@
    
    const video = document.querySelector('#video');
    const button = document.querySelector('#button');
-   const select = document.querySelector('#select');
+   //const select = document.querySelector('#select');
+   const div = document.querySelector('#controls');
    let currentStream;
 
    function stopMediaTracks(stream) {
@@ -98,14 +99,20 @@
 }
 
    button.addEventListener('click', event => {
+   	const b1 = document.querySelector('#cont');
   if (typeof currentStream !== 'undefined') {
     stopMediaTracks(currentStream);
   }
   const videoConstraints = {};
-  if (select.value === '') {
+  // if (select.value === '') {
+  //   videoConstraints.facingMode = 'environment';
+  // } else {
+  //   videoConstraints.deviceId = { exact: select.value };
+  // }
+  if (b1.value === '') {
     videoConstraints.facingMode = 'environment';
   } else {
-    videoConstraints.deviceId = { exact: select.value };
+    videoConstraints.deviceId = { exact: b1.value };
   }
   const constraints = {
     video: videoConstraints,
@@ -126,17 +133,22 @@
 });
 
 function gotDevices(mediaDevices) {
-  select.innerHTML = '';
-  select.appendChild(document.createElement('option'));
+  //select.innerHTML = '';
+  //select.appendChild(document.createElement('option'));
+  let b = document.createElement('button');
   let count = 1;
   mediaDevices.forEach(mediaDevice => {
     if (mediaDevice.kind === 'videoinput') {
-      const option = document.createElement('option');
-      option.value = mediaDevice.deviceId;
+      //const option = document.createElement('option');
+     // option.value = mediaDevice.deviceId;
       const label = mediaDevice.label || `Camera ${count++}`;
       const textNode = document.createTextNode(label);
-      option.appendChild(textNode);
-      select.appendChild(option);
+      b.value = mediaDevice.deviceId;
+      b.appendChild(textNode);
+      b.id = "cont";
+      div.appendChild(b);
+      //option.appendChild(textNode);
+     // select.appendChild(option);
     }
   });
 }
