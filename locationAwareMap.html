@@ -32,7 +32,7 @@
           const drawCirc = new google.maps.Circle({
             fillColor: "#ff7d7d",
             map,
-            center: {lat: p.coords.latitude , lng: p.coords.longitude},
+            center: {lat: p.coords.latitude, lng: p.coords.longitude},
             radius: 3.5,
           })
 
@@ -57,7 +57,7 @@
         navigator.geolocation.getCurrentPosition((p)=>{
           map = new google.maps.Map(document.querySelector("#map"),{
           //center: {lat:41.87156228337112 , lng: -87.64935330783663},
-          center: {lat: p.coords.latitude , lng: p.coords.longitude},
+          center: {lat: p.coords.latitude, lng: p.coords.longitude},
           zoom: 17.3,
           styles: [
       { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
