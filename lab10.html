@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!-- A page that will let the user
+ enter some text;
+select a language;
+hear the text read in the appropriate language when they press the "Speak" button -->
+
+<!-- //1. Create an HTML5  file named lab10.html  -->
+
+<html>
+<head>
+	<meta charset='utf-8'/>
+	<meta name="viewport" content="width=device-width">
+    <title>Lab 10: Speech Synthesis</title>
+</head>
+<body>
+	<!-- //2. Add a textarea element, a select control (with an empty option element) and a button (add the "disabled" attribute) -->
+
+	<label for="Textarea">Enter Text Here: </label>
+	<textarea name="Text" id="input" rows="4" cols="50"></textarea>
+
+	<label for="select">Choose a voice:</label>
+	<select name="select" id="select">
+  		<option value="empty"></option>
+	</select>
+
+	<button type="button" id="toEnable" disabled>Speak!</button>
+
+	<!-- Add some script: -->
+	<script>
+
+		// a. when the page loads, get the available languages from the set of voices available on the device
+
+		let inputTxt = document.querySelector('#input');
+		let voiceSelect = document.querySelector('#select');
+		let voices;
+
+		window.speechSynthesis.onvoiceschanged = function() {
+          voices = window.speechSynthesis.getVoices();
+		  // b. populate the select control with the options;
+          for(let i = 0; i < voices.length; i++) {
+           let option = document.createElement('option');
+           option.textContent = voices[i].name + ' (' + voices[i].lang + ')';
+           option.value = i;
+           option.setAttribute('data-name', voices[i].name);
+     	   voiceSelect.appendChild(option);
+          };
+      };
+
+      // c. add a change event handler on the select control which enables the button 
+      //    and which selects the appropriate voice
+
+       let button = document.querySelector("#toEnable");
+       select.onchange = (event) => {
+       	
+         if (event.target.value !== "")
+             button.disabled = false
+            }
+
+      // d. add a click event handler on the button which creates or updates the 
+      //    SpeechSynthesisUtterance with the appropriate language, voice and text
+
+        button.addEventListener("click", () => {
+        let utterThis = new SpeechSynthesisUtterance(inputTxt.value);
+        var selectedOption = voiceSelect.selectedOptions[0].getAttribute('data-name');
+        for(i = 0; i < voices.length ; i++) {
+   		 if(voices[i].name === selectedOption) {
+      		utterThis.voice = voices[i];
+      		utterThis.lang = voices[i].lang;
+      		utterThis.volume = 100;
+      		//utterThis.rate = 100;
+    		}
+  		}	
+        //utterThis.voice = voices[voiceSelect.value];
+  		window.speechSynthesis.speak(utterThis);
+  		console.log(utterThis);
+  		inputTxt.blur();
+		});
+
+	</script>
+
+
+</body>
+</html>
