@@ -8,92 +8,58 @@ hear the text read in the appropriate language when they press the "Speak" butto
 
 <html>
 <head>
-	<meta charset='utf-8'/>
-	<meta name="viewport" content="width=device-width">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <meta charset='utf-8'/>
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Lab 10: Speech Synthesis</title>
-    <style>
-    	html,
-		body {
-			margin: 0;
-			padding: 0;
-		}
-
-		html {
-			height: 100%;
-		}
-
-    	header {
-			background: #f0293e;
-			color: #fff;
-			text-align: center;
-		}
-
-    	body {background-color: #ffffa1;}
-
-    	footer{
-			background: #333e5a;
-			color: #fff;
-			text-align: center;
-		}
-
-		footer a {
-			color: #fff;
-		}
-    </style>
 </head>
 <body>
-	<header>
-	<h1>Speech Synthesis</h1>
-	</header>
-	<!-- //2. Add a textarea element, a select control (with an empty option element) and a button (add the "disabled" attribute) -->
-    <div class="p-3 mb-2 bg-secondary text-white">
-	<!-- <label for="Textarea">Enter Text Here: </label> -->
-	<textarea name="Text" placeholder= "Enter Text Here:" id="input" rows="5" cols="20"></textarea></div>
-    <div class="p-3 mb-2 bg-warning text-dark">
-	<label for="select">Choose a voice:</label>
-	<select class="form-control input-sm" name="select" id="select">
-  		<option value="empty"></option>
-	</select>
-	<button type="button" id="toEnable" disabled>Speak!</button>
-    </div>
+  <!-- //2. Add a textarea element, a select control (with an empty option element) and a button (add the "disabled" attribute) -->
+    <div>
+  <!-- <label for="Textarea">Enter Text Here: </label> -->
+  <textarea name="Text" placeholder= "Enter Text Here:" id="input" rows="4" cols="50"></textarea></div>
+     
+    <div>
+  <label for="select">Choose a voice:</label>
+  <select name="select" id="select">
+      <option value="empty"></option>
+  </select></div>
 
-	<!-- Add some script: -->
-	<script>
+  <button type="button" id="toEnable" disabled>Speak!</button>
 
-		// a. when the page loads, get the available languages from the set of voices available on the device
+  <!-- Add some script: -->
+  <script>
 
-		let inputTxt = document.querySelector('#input');
-		let voiceSelect = document.querySelector('#select');
-		let button = document.querySelector("#toEnable");
-		let voices;
+    // a. when the page loads, get the available languages from the set of voices available on the device
 
-		window.speechSynthesis.onvoiceschanged = function() {
+    let inputTxt = document.querySelector('#input');
+    let voiceSelect = document.querySelector('#select');
+    let button = document.querySelector("#toEnable");
+    let voices;
+
+    window.speechSynthesis.onvoiceschanged = function() {
           voices = window.speechSynthesis.getVoices();
 
-		  // b. populate the select control with the options;
+      // b. populate the select control with the options;
 
           for(let i = 0; i < voices.length; i++) {
            let option = document.createElement('option');
            option.textContent = voices[i].name + ' (' + voices[i].lang + ')';
            option.value = i;
            option.setAttribute('data-name', voices[i].name);
-     	   voiceSelect.appendChild(option);
+         voiceSelect.appendChild(option);
           };
       };
 
       // c. add a change event handler on the select control which enables the button 
       //    and which selects the appropriate voice
 
-       voiceSelect.onchange = (event) => {
-       	  if (event.target.value == ""){
-             button.disabled = true
-             button.setAttribute('class',"btn btn-dark");}
-
-         if (event.target.value !== ""){
+       select.onchange = (event) => {
+        
+         if (event.target.value !== "")
              button.disabled = false
-             button.setAttribute('class',"btn btn-success");}
-        }
+             button.setAttribute('class',"btn btn-success");
+            }
 
       // d. add a click event handler on the button which creates or updates the 
       //    SpeechSynthesisUtterance with the appropriate language, voice and text
@@ -104,26 +70,20 @@ hear the text read in the appropriate language when they press the "Speak" butto
         let selectedOption = voiceSelect.selectedOptions[0].getAttribute('data-name');
 
         for(i = 0; i < voices.length ; i++) {
-   		 if(voices[i].name === selectedOption) {
-      		utterThis.voice = voices[i];
-      		utterThis.lang = voices[i].lang;
-      		utterThis.volume = 100;
-      		//utterThis.rate = 100;
-    		}
-  		}	
+       if(voices[i].name === selectedOption) {
+          utterThis.voice = voices[i];
+          utterThis.lang = voices[i].lang;
+          utterThis.volume = 100;
+          //utterThis.rate = 100;
+        }
+      } 
         //utterThis.voice = voices[voiceSelect.value];
-  		window.speechSynthesis.speak(utterThis);
-  		//console.log(utterThis);
-  		inputTxt.blur();
-		});
+      window.speechSynthesis.speak(utterThis);
+      //console.log(utterThis);
+      inputTxt.blur();
+    });
 
-	</script>
-
-	<footer>
-    <p>Built by
-      <a href="https://www.linkedin.com/in/saummaysinghal/">@SaummayS</a>
-    </p>
-  </footer>
+  </script>
 
 
 </body>
