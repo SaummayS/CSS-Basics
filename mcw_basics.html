@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!-- 1. Create a new file named mcw_basics.html -->
+<html>
+<head>
+  <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body>
+
+<!-- 2. Add the following components:
+	a. Text Input  -->
+	<!-- with the label Enter your name -->
+
+	<label class="mdc-text-field mdc-text-field--filled">
+	  <span class="mdc-text-field__ripple"></span>
+	  <span class="mdc-floating-label" id="my-label-id">Enter your name</span>
+	  <input class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
+	  <span class="mdc-line-ripple"></span>
+	</label>
+
+	<!-- b. Button -->
+	<!-- with the label Show Snackbar -->
+
+	<button class="mdc-button foo-button">
+	  <div class="mdc-button__ripple"></div>
+	  <span class="mdc-button__label">Show Snackbar</span>
+	</button>
+
+	<!-- c. Snackbar -->
+	<!-- which will display the text You entered + the value from the Text Input box. -->
+
+	<div class="mdc-snackbar">
+	  <div class="mdc-snackbar__surface" role="status" aria-relevant="additions">
+	    <div class="mdc-snackbar__label" aria-atomic="false">
+	      Can't display text.
+	    </div>
+	  </div>
+	</div>
+
+<!-- 3. Add script to initialize the components -->
+<script>
+
+//import {MDCTextField} from '@material/textfield';
+//const text = new MDCTextField(document.querySelector('.mdc-text-field'));
+const text = document.querySelector('.mdc-text-field')
+mdc.textField.MDCTextField.attachTo(text)
+mdc.ripple.MDCRipple.attachTo(text);
+
+const button = document.querySelector('.foo-button')
+mdc.ripple.MDCRipple.attachTo(button);
+
+//import {MDCSnackbar} from '@material/snackbar';
+//const snack = new MDCSnackbar(document.querySelector('.mdc-snackbar'));
+const snackbar = document.querySelector('.mdc-snackbar')
+const snackbarToOpen = mdc.snackbar.MDCSnackbar.attachTo(snackbar)
+
+//4. Add an event handler so that when the button is clicked, the snackbar text is set and the snackbar is shown.
+button.addEventListener("click", function(){
+	textVal = document.querySelector('input').value
+	//console.log(textVal);
+	snackbarToOpen.labelText = "You entered " + textVal
+	snackbarToOpen.open()
+})
+
+
+</script> 
+
+
+</body>
+</html>
