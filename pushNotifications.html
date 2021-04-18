@@ -20,7 +20,7 @@
     <script>
 
       const registerServiceWorker = () =>  {
-          return navigator.serviceWorker.register('./sw.js', {scope: '/IT202-Spring2021-activities/lab13'})
+          return navigator.serviceWorker.register('./sw2.js', {scope: './'})
           .then(function(registration) {
             console.log('Service worker successfully registered.', registration);
             return registration;
